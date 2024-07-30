@@ -1,0 +1,37 @@
+[
+  {
+      "id": 1,
+      "name": "Blue Denim Jacket",
+      "price": 49.99,
+      "image": "https://example.com/images/blue-denim-jacket.jpg",
+      "description": "A classic blue denim jacket with a relaxed fit. Perfect for casual outings."
+  },
+  {
+      "id": 2,
+      "name": "Black T-Shirt",
+      "price": 19.99,
+      "image": "https://example.com/images/black-tshirt.jpg",
+      "description": "A simple and comfortable black t-shirt made from 100% cotton. Ideal for everyday wear."
+  },
+  {
+      "id": 3,
+      "name": "Red Maxi Dress",
+      "price": 79.99,
+      "image": "https://example.com/images/red-maxi-dress.jpg",
+      "description": "A stunning red maxi dress with a flowing silhouette. Perfect for special occasions."
+  },
+  {
+      "id": 4,
+      "name": "White Sneakers",
+      "price": 59.99,
+      "image": "https://example.com/images/white-sneakers.jpg",
+      "description": "Comfortable and stylish white sneakers with a durable rubber sole. Great for everyday activities."
+  },
+  {
+      "id": 5,
+      "name": "Green Hoodie",
+      "price": 39.99,
+      "image": "https://example.com/images/green-hoodie.jpg",
+      "description": "A cozy green hoodie with a soft fleece lining. Perfect for keeping warm during cooler days."
+  }
+]
