@@ -96,6 +96,7 @@ ul li:hover{
 }
 .quantity-container .quantity{
   width: 100%;
+  max-width: 60px;
 }
 .user-quantity{
   width: 30%;

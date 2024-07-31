@@ -32,11 +32,11 @@ a {
   max-width: 650px;
 }
 .search-container select{
-  padding: 10px;
   border: 1px solid black;
   cursor: pointer;
   border-radius: 5px;
-  width: 70px;
+  width: 15%;
+  /* min-width: 85px; */
   margin-right: 5px;
 }
 .search-container select:focus{
@@ -47,7 +47,7 @@ a {
   border: 1px solid black;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  width: 70%;
+  width: 55%;
 }
 .search-container .search-input:focus{
   outline: none;
