@@ -37,4 +37,5 @@ class Products_model extends CI_Model{
 
     return $query->result();
   }
+
 }

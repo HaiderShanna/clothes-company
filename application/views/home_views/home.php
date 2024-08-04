@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/home_style.css') ?>">
+
+  <!-- Font awesome link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Sweet alert 2 link -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <title>Home</title>
 </head>
 <body>
@@ -25,7 +31,7 @@
     </div>
     <ul>
       <li>
-        <button class="login-btn"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
+        <button class="login-btn open-form"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
       </li>
       <li>
         <a href="<?php echo base_url('home/about') ?>">About</a>
@@ -35,6 +41,12 @@
       </li>
     </ul>
   </header>
+  <dialog class="dialog">
+    <button class="close-btn">close</button>
+    <div class="dialog-container">
+      <!-- the form is generated in JS -->
+    </div>
+  </dialog>
   <div class="img-container">
     <img class="preview-img" src="<?php echo base_url('assets/imgs/background-img.jpg') ?>" alt="">
   </div>
@@ -101,7 +113,17 @@
             <p>&copy; 2024 Top Fat G. All rights reserved.</p>
         </div>
   </footer>
+
+  <!-- Hidden inputs to pass to the JS -->
   <input type="hidden" id="base-url" value="<?php echo base_url() ?>">
+  <input type="hidden" id="flashdata" value='<?php echo json_encode($this->session->flashdata('login-errors')) ?>'>
+  <input type="hidden" id="signup-errors" value='<?php echo json_encode($this->session->flashdata('signup-errors')) ?>'>
+  <input type="hidden" id="success" value='<?php echo $this->session->flashdata('success') ?>'>
+  <input type="hidden" id="failed" value='<?php echo $this->session->flashdata('failed') ?>'>
+  <input type="hidden" id="inputs" value='<?php echo json_encode($this->session->flashdata('inputs')) ?>'>
+  <!-- -------------------------------- -->
+   
   <script type="module" src="<?php echo base_url('assets/js/home/home_page.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
 </body>
 </html>

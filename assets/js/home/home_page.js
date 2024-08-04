@@ -10,7 +10,6 @@ let categorySelect = document.querySelector('.category');
 
 let defaultContainer = container.innerHTML;
 
-
 /* 
 Get data for specific category, limit and run a callback function with the returned data  
 */
@@ -143,5 +142,6 @@ async function printData() {
   })
 }
 
-
 printData();
+
+

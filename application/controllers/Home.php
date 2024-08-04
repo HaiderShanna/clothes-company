@@ -5,6 +5,7 @@ class Home extends CI_Controller {
   public function __construct(){
     parent::__construct();
     $this->load->model('products_model', 'model');
+    $this->load->library('session');
   }
 
   /* Loads the home page */
@@ -86,5 +87,6 @@ class Home extends CI_Controller {
     $data = $this->model->get_all_clothes($category_id);
     echo json_encode($data);
   }
+  
   
 }
