@@ -5,7 +5,6 @@ let container = document.querySelector('.right-side');
 let baseUrl = document.querySelector('.base-url').value;
 let id = document.querySelector('.product-id').value;
 
-
 /* Get the product we want */
 $(document).ready(() => {
   $.get(`${baseUrl}product/product/getProduct/${id}`, (data, status) => {
@@ -15,6 +14,9 @@ $(document).ready(() => {
     // Create product elements 
     createElements(data);
 
+    /* Add to cart event listener */
+    let addToCartEl  = document.querySelector('.add-to-cart-btn');
+    addToCartEl.addEventListener('click', addToCart);
 
 
     // Get available colors and sizes and update each time the user change the color
@@ -160,6 +162,17 @@ function updateVariants(data){
       }
     })
   })
+}
+
+/* Add product to the local storage (cart) */
+function addToCart(){
+  let data = JSON.parse(localStorage.getItem('cart')) || [];
+  // data += {
+  //   id,
+  //   img: 
+  // }
+
+  // localStorage.setItem('cart', data);
 }
 
 

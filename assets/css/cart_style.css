@@ -1,0 +1,157 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 100vh;
+}
+
+
+/* ---------------------------- */
+
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+.products-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  row-gap: 10px;
+  width: 70%;
+  max-width: 850px;
+}
+.product {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+  transition: 0.3s;
+}
+.product:hover{
+  transform: scale(1.01);
+}
+.product h3{
+  max-width: 400px;
+  width: 100%;
+}
+.product small{
+  display: block;
+  color: grey;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.product label{
+  margin: 0 10px;
+  text-align: center;
+}
+#quantity{
+  width: 70px;
+  display: block;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+.product .price{
+  margin: 0 10px;
+}
+
+.product .product-img{
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.product .remove-btn{
+  cursor: pointer;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 25px;
+  transition: 0.1s;
+}
+.product .remove-btn:hover{
+  transform: scale(1.02);
+  opacity: 0.7;
+}
+.checkout-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: max-content;
+  height: 100%;
+  background-color: #ece9e9;
+  padding: 20px;
+}
+.checkout-container p{
+  display: flex;
+  justify-content: space-between;
+}
+.checkout-container button{
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+  background-color: grey;
+  font-size: 15px;
+  border: 1px solid black;
+  transition: 0.3s;
+}
+.checkout-container button:hover{
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+.checkout-container .total{
+  font-weight: bold;
+}
+.payment-methods{
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
+}
+.payment-methods i {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+
+
+
+
+
+/* ------------------------------- */
+
+
+/* Loader Design */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: relative;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  }

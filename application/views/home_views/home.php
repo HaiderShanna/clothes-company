@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/header_design.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/home_style.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/footer_design.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/login_dialog.css') ?>">
 
   <!-- Font awesome link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,14 +40,59 @@
         <a href="<?php echo base_url('home/about') ?>">About</a>
       </li>
       <li>
-        <a href="<?php echo base_url('home/cart') ?>"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="<?php echo base_url('cart') ?>"><i class="fa-solid fa-cart-shopping"></i></a>
       </li>
     </ul>
   </header>
   <dialog class="dialog">
     <button class="close-btn">close</button>
     <div class="dialog-container">
-      <!-- the form is generated in JS -->
+      <!-- Login Form -->
+      <?php echo form_open('login', ['class' => 'login-form'], ['file_path' => 'home_views/home']) ?>
+      <h1>Login</h1>
+      <label for="login-email">Email :</label>
+      <input type="email" id="login-email" class="email" name="login-email">
+      <?php echo form_error('login-email', '<small class="error">', '</small>') ?>
+
+      <label for="login-password">Password :</label>
+      <input type="password" id="login-password" class="password" name="login-password">
+      <?php echo form_error('login-password', '<small class="error">', '</small>') ?>
+
+
+      <p>Don't have an account ? <span class="create">Create One</span></p>
+      <button class="login-button">Login</button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <?php echo form_open('signup', ['class' => 'signup-form hide'], ['file_path' => 'home_views/home']) ?>
+      <h1>Sign Up</h1>
+      <label for="name">Name :</label>
+      <input type="text" id="name" class="name" name="name">
+      <?php echo form_error('name', '<small class="error">', '</small>') ?>
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" class="email" name="email">
+      <?php echo form_error('email', '<small class="error">', '</small>') ?>
+
+      <label for="password">Password :</label>
+      <input type="password" id="password" class="password" name="password">
+      <?php echo form_error('password', '<small class="error">', '</small>') ?>
+
+      <label for="password2">Confirm Password :</label>
+      <input type="password" id="password2" class="password2" name="password2">
+      <?php echo form_error('password2', '<small class="error">', '</small>') ?>
+
+      <p>Already have an account ? <span class="login">Log in</span></p>
+      <button class="login-button">Sign Up</button>
+      </form>
+
+      <!-- logged in -->
+      <div class="logged-in hide">
+        <h3>Logged in as : <b><?php echo $_SESSION['name'] ?></b></h3>
+        <button class="track-orders-btn">Track Your Orders</button>
+        <a class="log-out-btn" href="<?php echo base_url('logout') ?>">Log out</a>
+      </div>
+
     </div>
   </dialog>
   <div class="img-container">
@@ -116,11 +164,11 @@
 
   <!-- Hidden inputs to pass to the JS -->
   <input type="hidden" id="base-url" value="<?php echo base_url() ?>">
-  <input type="hidden" id="flashdata" value='<?php echo json_encode($this->session->flashdata('login-errors')) ?>'>
-  <input type="hidden" id="signup-errors" value='<?php echo json_encode($this->session->flashdata('signup-errors')) ?>'>
+  <input type="hidden" id="error-type" value='<?php echo $this->session->flashdata('error_type') ? $this->session->flashdata('error_type') : ''  ?>'>
   <input type="hidden" id="success" value='<?php echo $this->session->flashdata('success') ?>'>
   <input type="hidden" id="failed" value='<?php echo $this->session->flashdata('failed') ?>'>
   <input type="hidden" id="inputs" value='<?php echo json_encode($this->session->flashdata('inputs')) ?>'>
+  <input type="hidden" id="logged-in-session" value='<?php echo isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : '' ?>'>
   <!-- -------------------------------- -->
    
   <script type="module" src="<?php echo base_url('assets/js/home/home_page.js') ?>"></script>

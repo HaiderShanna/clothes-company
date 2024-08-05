@@ -4,16 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us</title>
+
+  <!-- Font awesome link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Sweet alert 2 link -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/about_style.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/cart_style.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/header_design.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/footer_design.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/login_dialog.css') ?>">
+
+  <title>Cart</title>
 </head>
 
 <body>
@@ -21,6 +24,16 @@
     <a href="<?php echo base_url('home') ?>">
       <img class="logo" src="<?php echo base_url('assets/imgs/svg/logo-no-background.svg') ?>" alt="">
     </a>
+    <div class="search-container">
+      <select name="" id="category" class="category">
+        <option value="best-selling" selected>All</option>
+        <option value="men">Men</option>
+        <option value="women">Women</option>
+        <option value="children">Children</option>
+      </select>
+      <input type="search" class="search-input" placeholder="Enter something to search for ...">
+      <button class="search-btn"><i class="fa fa-search"></i></button>
+    </div>
     <ul>
       <li>
         <button class="login-btn open-form"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
@@ -37,12 +50,11 @@
     </ul>
   </header>
 
-  <!-- login dialog -->
   <dialog class="dialog">
     <button class="close-btn">close</button>
     <div class="dialog-container">
       <!-- Login Form -->
-      <?php echo form_open('login', ['class' => 'login-form'], ['file_path' => 'about_views/about_page']) ?>
+      <?php echo form_open('login', ['class' => 'login-form'], ['file_path' => 'cart_views/cart']) ?>
       <h1>Login</h1>
       <label for="login-email">Email :</label>
       <input type="email" id="login-email" class="email" name="login-email">
@@ -58,7 +70,7 @@
       </form>
 
       <!-- Sign Up Form -->
-      <?php echo form_open('signup', ['class' => 'signup-form hide'], ['file_path' => 'about_views/about_page']) ?>
+      <?php echo form_open('signup', ['class' => 'signup-form hide'], ['file_path' => 'cart_views/cart']) ?>
       <h1>Sign Up</h1>
       <label for="name">Name :</label>
       <input type="text" id="name" class="name" name="name">
@@ -90,34 +102,27 @@
     </div>
   </dialog>
 
-  <main class="about-page">
-    <h1>About Us</h1>
-    <section class="about-company">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum, urna nec bibendum ullamcorper, mi arcu luctus nunc, sed vehicula purus leo nec lorem. In lacinia, libero eget tincidunt sodales, orci odio lacinia libero, a facilisis nunc dolor a lacus. Sed hendrerit, sem sed lacinia tristique, tortor turpis gravida mi, ac efficitur felis metus at orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras facilisis viverra velit, a blandit velit interdum a. Proin nec elementum nisi. Aliquam erat volutpat. Donec venenatis metus ut orci ultrices, nec bibendum metus tempor. Integer eget justo nulla. Nam vel sagittis odio, in tempor libero. Phasellus commodo, nulla at consequat faucibus, neque velit vehicula nisl, non volutpat nisi nunc sit amet odio.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod, nisi eu vulputate pharetra, ipsum felis venenatis justo, eu luctus tortor nisi ut mauris. Suspendisse potenti. Sed eu augue a dolor fermentum elementum et vel purus. Vivamus tincidunt, mi nec luctus commodo, arcu odio congue magna, id ullamcorper nisl nulla id nunc. Cras bibendum, sem id bibendum volutpat, lorem ipsum varius nunc, vel sodales est eros in nunc. Donec fringilla lorem sit amet ultricies vehicula. Phasellus condimentum non odio id gravida. Sed bibendum turpis in neque fermentum, non accumsan erat dignissim.</p>
-    </section>
+  <div class="content">
+    <div class="products-container">
+      <h1>Your Cart is Empty</h1>
+    </div>
+    <div class="checkout-container">
+      <h2>Order Summary : </h2>
+      <hr>
+      <p class="subtotal">Subtotal: <span></span></p>
+      <p class="shipping">Shipping: <span></span></p>
+      <p class="taxes">Taxes: <span></span></p>
+      <p class="total">Total: <span></span></p>
+      <hr>
+      <button class="checkout-btn">Checkout</button>
+      <div class="payment-methods">
+        <i class="fa-brands fa-paypal"></i>
+        <i class="fa-brands fa-cc-mastercard"></i>
+        <i class="fa-brands fa-cc-visa"></i>
+      </div>
+    </div>
+  </div>
 
-    <section class="company-vision">
-      <h2>Our Vision</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod, nisi eu vulputate pharetra, ipsum felis venenatis justo, eu luctus tortor nisi ut mauris. Suspendisse potenti. Sed eu augue a dolor fermentum elementum et vel purus. Vivamus tincidunt, mi nec luctus commodo, arcu odio congue magna, id ullamcorper nisl nulla id nunc. Cras bibendum, sem id bibendum volutpat, lorem ipsum varius nunc, vel sodales est eros in nunc.</p>
-    </section>
-
-    <section class="company-mission">
-      <h2>Our Mission</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras facilisis viverra velit, a blandit velit interdum a. Proin nec elementum nisi. Aliquam erat volutpat. Donec venenatis metus ut orci ultrices, nec bibendum metus tempor. Integer eget justo nulla. Nam vel sagittis odio, in tempor libero. Phasellus commodo, nulla at consequat faucibus, neque velit vehicula nisl, non volutpat nisi nunc sit amet odio.</p>
-    </section>
-
-    <section class="company-values">
-      <h2>Our Values</h2>
-      <ul>
-        <li>Integrity: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Innovation: Vivamus euismod, nisi eu vulputate pharetra.</li>
-        <li>Customer Focus: Proin nec elementum nisi.</li>
-        <li>Sustainability: Aliquam erat volutpat. Donec venenatis metus ut orci ultrices.</li>
-      </ul>
-    </section>
-  </main>
 
   <footer class="footer">
     <div class="footer-container">
@@ -153,8 +158,9 @@
     </div>
   </footer>
 
+
   <!-- Hidden inputs to pass to the JS -->
-  <input type="hidden" id="base-url" value="<?php echo base_url() ?>">
+  <input type="hidden" id="base-url" class="base-url" value="<?php echo base_url() ?>">
   <input type="hidden" id="error-type" value='<?php echo $this->session->flashdata('error_type') ? $this->session->flashdata('error_type') : ''  ?>'>
   <input type="hidden" id="success" value='<?php echo $this->session->flashdata('success') ?>'>
   <input type="hidden" id="failed" value='<?php echo $this->session->flashdata('failed') ?>'>
@@ -162,6 +168,7 @@
   <input type="hidden" id="logged-in-session" value='<?php echo isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : '' ?>'>
   <!-- -------------------------------- -->
 
+  <script type="module" src="<?php echo base_url('assets/js/cart/cart.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
 </body>
 
