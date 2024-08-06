@@ -11,6 +11,8 @@ class Login extends CI_Controller{
     $email = $this->input->post('login-email');
     $password = $this->input->post('login-password');
     $viewPath = $this->input->post('file_path');
+    $params = $this->input->post('param');
+    $id = ['id' => $params];
     // creating rules
     $this->form_validation->set_rules('login-email', 'Email', 'trim|required|valid_email|callback_checkLoginEmail');
     $this->form_validation->set_rules('login-password', 'Password', 'trim|required|callback_checkPassword');
@@ -19,7 +21,7 @@ class Login extends CI_Controller{
     {
       $this->session->set_flashdata('inputs', ['email' => $email]);
       $this->session->set_flashdata('error_type', 'login');
-      $this->load->view($viewPath);
+      $this->load->view($viewPath, $id);
     }
     else
     {
@@ -32,7 +34,7 @@ class Login extends CI_Controller{
       $this->session->sess_regenerate(TRUE);
       $this->session->set_userdata($data);
       $this->session->set_flashdata('success', 'Logged In Successfully');
-      $this->load->view($viewPath);
+      $this->load->view($viewPath, $id);
     }
   } 
 
@@ -74,6 +76,8 @@ class Login extends CI_Controller{
     $password = $this->input->post('password');
     $password2 = $this->input->post('password2');
     $viewPath = $this->input->post('file_path');
+    $params = $this->input->post('param');
+    $id = ['id' => $params];
 
     // creating rules
     $this->form_validation->set_rules('name', 'Name', 'trim|required|alpha_numeric_spaces|max_length[35]|min_length[3]');
@@ -86,7 +90,7 @@ class Login extends CI_Controller{
     {
       $this->session->set_flashdata('inputs', ['name' => $name, 'email' => $email]);
       $this->session->set_flashdata('error_type', 'signup');
-      $this->load->view($viewPath);
+      $this->load->view($viewPath, $id);
     }
     else
     {
@@ -99,11 +103,11 @@ class Login extends CI_Controller{
         $this->session->sess_regenerate(TRUE);
         $this->session->set_userdata(['name' => $name, 'email' => $email, 'logged_in' => true]);
         $this->session->set_flashdata('success', 'Signed Up Successfully');
-        $this->load->view($viewPath);
+        $this->load->view($viewPath, $id);
       }
       else{
         $this->session->set_flashdata('failed', 'Something Went Wrong !');
-        $this->load->view($viewPath);
+        $this->load->view($viewPath, $id);
       }
 
     }

@@ -32,7 +32,11 @@
         <a href="<?php echo base_url('home/about') ?>">About</a>
       </li>
       <li>
-        <a href="<?php echo base_url('cart') ?>"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="<?php echo base_url('cart') ?>">
+          <i class="fa-solid fa-cart-shopping">
+            <span class="cart-num"></span>
+          </i>
+        </a>
       </li>
     </ul>
   </header>

@@ -1,4 +1,5 @@
 import * as module from "../modules/helper.js";
+module.updateCartNumber();
 
 let baseUrl = document.querySelector('.base-url').value;
 let productsContainer = document.querySelector('.products-container');
@@ -17,12 +18,14 @@ let subtotalPrice = 0;
 let totalPrice; 
 
 /* Print All cart data */
-productsContainer.innerHTML = ``;
+if(cartData.length > 0){
+  productsContainer.innerHTML = ``;
+}
 cartData.forEach((product) => {
-  subtotalPrice += product.price;
+  subtotalPrice += parseInt(product.price);
   productsContainer.innerHTML += `
     <div class="product">
-      <img class="product-img" data-id="${product.id}" src="${baseUrl}assets/imgs/products/${product.img}" alt="product image">
+      <img class="product-img" data-id="${product.id}" src="${product.img}" alt="product image">
       <h3>${product.name} 
         <small>Color: ${product.color}</small>
         <small>Available: ${product.available}</small>
@@ -31,7 +34,7 @@ cartData.forEach((product) => {
         Quantity
         <input type="number" value=${product.quantity} id="quantity">
       </label>
-      <p class="price">$${product['price'].toFixed(2)}</p>
+      <p class="price">$${parseInt(product.price).toFixed(2)}</p>
       <button class="remove-btn" data-id="${product.id}"><i class="fa-solid fa-trash"></i></button>
     </div>
   `;

@@ -28,14 +28,23 @@ class Products_model extends CI_Model{
   }
 
   /* Get a specific product and its variants (colors, sizes) using its ID */
-  public function get_product($id){
-    $query = $this->db->select(['product.id', 'name', 'price', 'img', 'description', 'size', 'color', 'quantity'])
-    ->join('variants', 'product.id = variants.product_id')
-    ->where('product.id', $id)
-    ->where('quantity !=', 0)
-    ->get('product');
+  public function get_variants($id){
+    $query = $this->db->query('
+      SELECT 
+        product.id, 
+        name, 
+        price, 
+        img, 
+        description,  
+        variants.color, 
+        GROUP_CONCAT(variants.size) as sizes, 
+        GROUP_CONCAT(variants.quantity) as quantity
+      FROM `product`
+      JOIN variants ON product.id = variants.product_id
+      WHERE product.id = ' . $id . '
+      GROUP BY product.id, variants.color;
+    ');
 
     return $query->result();
   }
-
 }

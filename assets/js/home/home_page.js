@@ -1,5 +1,5 @@
 import * as module from "../modules/helper.js";
-
+module.updateCartNumber();
 let container = document.querySelector('.container');
 let bestSelling = document.querySelector('.best-selling .products-grid');
 let men = document.querySelector('.men-clothes .products-grid');

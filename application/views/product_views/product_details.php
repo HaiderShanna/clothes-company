@@ -35,7 +35,11 @@
         <a href="<?php echo base_url('home/about') ?>">About</a>
       </li>
       <li>
-        <a href="<?php echo base_url('cart') ?>"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="<?php echo base_url('cart') ?>">
+          <i class="fa-solid fa-cart-shopping">
+            <span class="cart-num"></span>
+          </i>
+        </a>
       </li>
     </ul>
   </header>
@@ -44,7 +48,11 @@
     <button class="close-btn">close</button>
     <div class="dialog-container">
       <!-- Login Form -->
-      <?php echo form_open('login', ['class' => 'login-form'], ['file_path' => 'product_views/product_details']) ?>
+      <?php echo form_open('login',
+        ['class' => 'login-form'], 
+        ['file_path' => 'product_views/product_details',
+          'param'  => $id]) 
+      ?>
       <h1>Login</h1>
       <label for="login-email">Email :</label>
       <input type="email" id="login-email" class="email" name="login-email">
@@ -60,7 +68,7 @@
       </form>
 
       <!-- Sign Up Form -->
-      <?php echo form_open('signup', ['class' => 'signup-form hide'], ['file_path' => 'product_views/product_details']) ?>
+      <?php echo form_open('signup', ['class' => 'signup-form hide'], ['file_path' => 'product_views/product_details', 'param'  => $id]) ?>
       <h1>Sign Up</h1>
       <label for="name">Name :</label>
       <input type="text" id="name" class="name" name="name">
@@ -94,33 +102,10 @@
 
   <div class="container">
     <div class="img-container">
-      <img src="<?php echo base_url('assets/imgs/products/1.jpg') ?>" alt="">
+
     </div>
     <div class="right-side">
-      <h1 class="product-name">Lorem ipsum dolor sit.</h1>
-      <div class="description">
-        <h3>Description :</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae tenetur nihil velit et. Autem odio consequatur, numquam saepe enim sit unde molestiae perferendis, nisi expedita molestias accusamus est ad ipsa.</p>
-      </div>
-      <div class="selects">
-        <select id="color" class="color">
-          <option value="1">red</option>
-          <option value="2">Blue</option>
-        </select>
-        <select id="size" class="size">
-          <option value="1">red</option>
-          <option value="2">Blue</option>
-        </select>
-      </div>
-      <div class="quantity-container">
-        <p class="available-quantity">available quantity: <strong>10</strong></p>
-        <div class="user-quantity">
-          <label for="quantity">Quantity</label>
-          <input type="number" placeholder="Enter Quantity" value=1 id="quantity" class="quantity">
-        </div>
-      </div>
-      <h3 class="price">$99.50</h3>
-      <button class="add-to-cart-btn">Add To Cart</button>
+
     </div>
   </div>
   <div class="more-products">

@@ -11,8 +11,8 @@ class Product extends CI_Controller{
     $this->load->view('product_views/product_details', $data);
   }
 
-  public function getProduct($id){
-    $product = $this->model->get_product($id);
+  public function getVariants($id){
+    $product = $this->model->get_variants($id);
     echo json_encode($product);
   }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
 
   <title>Home</title>
 </head>
+
 <body>
   <span class="loader"></span>
   <header>
@@ -40,7 +42,11 @@
         <a href="<?php echo base_url('home/about') ?>">About</a>
       </li>
       <li>
-        <a href="<?php echo base_url('cart') ?>"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="<?php echo base_url('cart') ?>">
+          <i class="fa-solid fa-cart-shopping">
+            <span class="cart-num"></span>
+          </i>
+        </a>
       </li>
     </ul>
   </header>
@@ -111,7 +117,7 @@
         <h1>Men's Clothes :</h1>
         <button class="show-all-btn" data-category="men">Show All</button>
       </div>
-        <div class="products-grid"></div>
+      <div class="products-grid"></div>
     </div>
     <div class="women-clothes category-container">
       <div class="category-header">
@@ -129,37 +135,37 @@
     </div>
   </div>
   <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>About Us</h4>
-                <p>Top Fat G is your ultimate destination for trendy and stylish clothing. Stay fashionable with us!</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p>Email: info@topfatg.com</p>
-                <p>Phone: +123-456-7890</p>
-            </div>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>Top Fat G is your ultimate destination for trendy and stylish clothing. Stay fashionable with us!</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Top Fat G. All rights reserved.</p>
-        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@topfatg.com</p>
+        <p>Phone: +123-456-7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Top Fat G. All rights reserved.</p>
+    </div>
   </footer>
 
   <!-- Hidden inputs to pass to the JS -->
@@ -170,8 +176,9 @@
   <input type="hidden" id="inputs" value='<?php echo json_encode($this->session->flashdata('inputs')) ?>'>
   <input type="hidden" id="logged-in-session" value='<?php echo isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : '' ?>'>
   <!-- -------------------------------- -->
-   
+
   <script type="module" src="<?php echo base_url('assets/js/home/home_page.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
 </body>
+
 </html>

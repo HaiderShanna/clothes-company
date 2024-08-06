@@ -1,13 +1,16 @@
 import * as module from "../modules/helper.js";
+module.updateCartNumber();
 
 let imageContainer = document.querySelector('.img-container');
 let container = document.querySelector('.right-side');
 let baseUrl = document.querySelector('.base-url').value;
 let id = document.querySelector('.product-id').value;
+let loggedIn = document.getElementById('logged-in-session');
+let dialog = document.querySelector('dialog');
 
 /* Get the product we want */
 $(document).ready(() => {
-  $.get(`${baseUrl}product/product/getProduct/${id}`, (data, status) => {
+  $.get(`${baseUrl}product/product/getVariants/${id}`, (data, status) => {
     module.hideSpinner();
     data = JSON.parse(data);
 
@@ -15,171 +18,170 @@ $(document).ready(() => {
     createElements(data);
 
     /* Add to cart event listener */
-    let addToCartEl  = document.querySelector('.add-to-cart-btn');
-    addToCartEl.addEventListener('click', addToCart);
+    let addToCartEl = document.querySelector('.add-to-cart-btn');
+    addToCartEl.addEventListener('click', ()=>{
+      if(loggedIn.value){
+        addToCart();
+      }
+      else{
+        dialog.showModal();
+      }
+    });
 
 
     // Get available colors and sizes and update each time the user change the color
     setColors(data);
-
-    /* update the sizes and quantity when changing the color or the size */
-    updateVariants(data);
   })
 })
 
 /* Create product DOM elements  */
-function createElements(data){
-  let imgEl = document.createElement('img');
-  let nameEl = document.createElement('h1');
-  let descriptionEl = document.createElement('p');
-  let selects = document.createElement('div');
-  let color = document.createElement('select');
-  let size = document.createElement('select');
-  let quantityContainer = document.createElement('div');
-  let availableQuantity = document.createElement('p');
-  let userQuantity = document.createElement('div');
-  let label = document.createElement('label');
-  let quantity = document.createElement('input');
-  let price = document.createElement('h3');
-  let addToCart = document.createElement('button');
+function createElements(data) {
+  let quantity = data[0].quantity.split(',');
+  imageContainer.innerHTML = `<img src="${data[0].img}" alt="product_img">`;
+  container.innerHTML = `
+    <h1 class="product-name">${data[0].name}</h1>
+    <div class="description">
+      <h3>Description :</h3>
+      <p>${data[0].description}</p>
+    </div>
+    <div class="selects">
+      <select id="color" class="color">
 
-  // add classes and data 
-  imgEl.src = data[0].img;
-  nameEl.innerHTML = data[0].name;
-  descriptionEl.innerHTML = data[0].description;
-  selects.classList.add('selects');
-  color.classList.add('color');
-  color.innerHTML = `<option>${data[0].color}</option>`;
-  size.classList.add('size');
-  size.innerHTML = `<option>${data[0].size}</option>`;
+      </select>
+      <select id="size" class="size">
 
-  // quantity elements
-  quantityContainer.classList.add('quantity-container');
-  availableQuantity.classList.add('available-quantity');
-  availableQuantity.innerHTML = `Available Quantity: <strong>${data[0].quantity}</strong`;
-  userQuantity.classList.add('user-quantity');
-  quantity.classList.add('quantity');
-  quantity.setAttribute('id', 'quantity');
-  quantity.setAttribute('placeholder', 'Enter Quantity');
-  quantity.setAttribute('value', 1);
-  quantity.setAttribute('type', 'number');
-  label.setAttribute('id', 'quantity');
-  label.innerHTML = `Quantity`;
-
-  price.classList.add('price');
-  price.innerHTML = `$${data[0].price}`;
-  addToCart.classList.add('add-to-cart-btn');
-  addToCart.innerHTML = `Add To Cart`;
-
-  // empty the containers and add the elements to them
-  imageContainer.innerHTML = ``;
-  container.innerHTML = ``;
-  imageContainer.appendChild(imgEl);
-  container.appendChild(nameEl);
-  container.appendChild(descriptionEl);
-  container.appendChild(selects);
-  container.appendChild(quantityContainer);
-  container.appendChild(price);
-  container.appendChild(addToCart);
-  quantityContainer.appendChild(availableQuantity);
-  quantityContainer.appendChild(userQuantity);
-  selects.appendChild(color);
-  selects.appendChild(size);
-  userQuantity.appendChild(label);
-  userQuantity.appendChild(quantity);
-
-}
-
-/* Get available colors and sizes and return an array */
-function getAvailable(data){
-  let colors = [];
-  let available = [];
-  let total = [];
-  data.forEach(variant => {
-    if(available[variant.color]){
-      available[variant.color].push(variant.size);
-    }
-    else{
-      available[variant.color] = [variant.size];
-      colors.push(variant.color);
-    }
-  });
-  total.push(colors);
-  total.push(available);
-  return total;
+      </select>
+    </div>
+    <div class="quantity-container">
+      <p class="available-quantity">available quantity: <strong>${quantity[0]}</strong></p>
+      <div class="user-quantity">
+        <label for="quantity">Quantity</label>
+        <input type="number" placeholder="Enter Quantity" value=1 id="quantity" class="quantity">
+      </div>
+    </div>
+    <h3 class="price">$<span>${data[0].price}</span></h3>
+    <button class="add-to-cart-btn">Add To Cart</button>
+  `;
 }
 
 /* get the available colors, sizes and set the default values */
-function setColors(data){
-  let available = getAvailable(data);
-    let colorSelect = document.querySelector('.color');
-    let sizeSelect = document.querySelector('.size');
-    colorSelect.innerHTML = ``;
-    sizeSelect.innerHTML = ``;
-    
-    available[0].forEach((color, i) => {
-      let colorOption = document.createElement('option');
-      colorOption.setAttribute('value', color);
-      colorOption.innerHTML = color;
-      colorSelect.appendChild(colorOption);
-    })
-
-    let sizes = available[1][available[0][0]];
-    sizes.forEach(size => {
-      let sizeOption = document.createElement('option');
-      sizeOption.setAttribute('value', size);
-      sizeOption.innerHTML = size;
-      sizeSelect.appendChild(sizeOption);
-    })
-}
-
-/* Update the sizes and quantity each time color changes */
-function updateVariants(data){
+function setColors(data) {
   let colorSelect = document.querySelector('.color');
   let sizeSelect = document.querySelector('.size');
-  let quantity = document.querySelector('.available-quantity');
+  colorSelect.innerHTML = ``;
+  sizeSelect.innerHTML = ``;
 
-  // change the quantity and sizes when changing the color
-  colorSelect.addEventListener('change', ()=>{
-    let available = getAvailable(data);
-    let sizes = available[1][colorSelect.value];
+  data.forEach(variant => {
+    // add color options
+    let colorOption = document.createElement('option');
+    colorOption.setAttribute('value', variant.color);
+    colorOption.innerHTML = variant.color;
+    colorSelect.appendChild(colorOption);
 
-    sizeSelect.innerHTML = ``;
-    sizes.forEach(size => {
-      let sizeOption = document.createElement('option');
-      sizeOption.setAttribute('value', size);
-      sizeOption.innerHTML = size;
-      sizeSelect.appendChild(sizeOption);
-    })
-    quantity.innerHTML = `Available Quantity: <strong>${data[colorSelect.selectedIndex].quantity}</strong>`;
+    // add size options
+    if(colorSelect.value === variant.color){
+      let sizes = (variant.sizes).split(',');
+      sizes.forEach(size => {
+        let sizeOption = document.createElement('option');
+        sizeOption.setAttribute('value', size);
+        sizeOption.innerHTML = size;
+        sizeSelect.appendChild(sizeOption);
+      })
+    }
   })
-
-  // change the quantity when changing the size
-  sizeSelect.addEventListener('change', ()=>{
-    data.forEach(variant => {
-      if(variant.color == colorSelect.value && variant.size == sizeSelect.value){
-        quantity.innerHTML = `Available Quantity: <strong>${variant.quantity}</strong>`;
-      }
-    })
-  })
+  /* update the sizes and quantity when changing the color or the size */
+  colorChange(data);
 }
 
-/* Add product to the local storage (cart) */
-function addToCart(){
-  let data = JSON.parse(localStorage.getItem('cart')) || [];
-  // data += {
-  //   id,
-  //   img: 
-  // }
+/* Update the sizes and UI each time color or size changes */
+function colorChange(data) {
+  let colorSelect = document.querySelector('.color');
+  let sizeSelect = document.querySelector('.size');
 
-  // localStorage.setItem('cart', data);
+  // change the quantity and sizes when changing the color
+  colorSelect.addEventListener('change', () => {
+    data.forEach(variant => {
+      if(colorSelect.value === variant.color){
+        sizeSelect.innerHTML = ``;
+        let sizes = (variant.sizes).split(',');
+        sizes.forEach(size => {
+          let sizeOption = document.createElement('option');
+          sizeOption.setAttribute('value', size);
+          sizeOption.innerHTML = size;
+          sizeSelect.appendChild(sizeOption);
+        })
+        updateUI(variant);
+      }
+    });
+  })
+
+  /* update UI each time size changes */
+  sizeSelect.addEventListener('change', () => {
+    data.forEach(variant => {
+      if(variant.color === colorSelect.value){
+        updateUI(variant);
+      }
+    });
+  });
+}
+
+  /* update available quantity, img and price */
+  function updateUI(selectedVariant){
+    let sizeSelect = document.querySelector('.size');
+
+    // available quantity
+    let quantity = document.querySelector('.available-quantity strong');
+    let available = (selectedVariant.quantity).split(',')
+    quantity.innerHTML = available[sizeSelect.selectedIndex];
+  }
+
+/* Add product to the local storage (cart) */
+function addToCart() {
+  let img = imageContainer.childNodes[0].src;
+  let name = document.querySelector('.product-name').innerHTML;
+  let color = document.querySelector('.color').value;
+  let size = document.querySelector('.size').value;
+  let quantity = document.querySelector('.quantity').value;
+  let available = document.querySelector('.available-quantity strong').innerHTML;
+  let price = document.querySelector('.price span').innerHTML;
+  let data = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // console.log(available);
+  if(quantity > parseInt(available)){
+    Swal.fire({
+      title: "No Available Quantity",
+      icon: "error",
+    });
+  }
+  else{
+    data.push({
+      id,
+      img,
+      name,
+      color,
+      size,
+      quantity,
+      available,
+      price
+    }) 
+    localStorage.setItem('cart', JSON.stringify(data));
+
+    Swal.fire({
+      title: "Added To Cart",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1000
+    });
+
+    module.updateCartNumber();
+  }
 }
 
 
 /* ------------------------------ */
 
 /* Get more clothes */
-async function getClothes(printData, category, limit){
+async function getClothes(printData, category, limit) {
   let res = await fetch(`${baseUrl}home/getClothes/${category}/${limit}`);
   let data = await res.json();
   printData(data);
@@ -187,7 +189,7 @@ async function getClothes(printData, category, limit){
 }
 
 /* Print the returned data */
-function printProducts(data){
+function printProducts(data) {
   let productsGrid = document.querySelector('.products-grid');
   data.forEach(product => {
     productsGrid.innerHTML += `
