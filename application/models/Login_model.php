@@ -37,4 +37,10 @@ class Login_model extends CI_Model{
     $query = $this->db->get_where('user', ['email' => $email]);
     return $query->row()->name;
   }
+
+  /* Get the user ID using the Email */
+  public function getUserId($email){
+    $query = $this->db->get_where('user', ['email' => $email]);
+    return $query->row()->id;
+  } 
 }

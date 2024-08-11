@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/css/login_dialog.css') ?>">
 
   <!-- Font awesome link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Sweet alert 2 link -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -96,7 +96,7 @@
       <div class="logged-in hide">
         <h3>Logged in as : <b><?php echo $_SESSION['name'] ?></b></h3>
         <button class="track-orders-btn">Track Your Orders</button>
-        <a class="log-out-btn" href="<?php echo base_url('logout') ?>">Log out</a>
+        <button class="log-out-btn">Log out</button>
       </div>
 
     </div>

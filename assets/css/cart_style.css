@@ -8,7 +8,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-height: 100vh;
+min-height: 100vh !important;
 }
 
 
@@ -28,6 +28,21 @@ height: 100vh;
   row-gap: 10px;
   width: 70%;
   max-width: 850px;
+}
+.products-container a{
+  cursor: pointer;
+  padding: 6px;
+  color: white;
+  background-color: grey;
+  font-size: 20px;
+  border: 1px solid black;
+  width: 50%;
+  text-align: center;
+  transition: 0.3s;
+}
+.products-container a:hover{
+  opacity: 0.8;
+  transform: scale(1.02);
 }
 .product {
   display: flex;

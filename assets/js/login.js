@@ -8,6 +8,13 @@ let loginForm = document.querySelector('.login-form');
 let signupForm = document.querySelector('.signup-form');
 let loggedIn = document.querySelector('.logged-in');
 let loggedInSession = document.getElementById('logged-in-session');
+let logOutBtn = document.querySelector('.log-out-btn');
+
+/* logout button onclick */
+logOutBtn.addEventListener('click', () => {
+  localStorage.removeItem('cart');
+  window.location.href = `${baseUrl}logout`;
+})
 
 
 /* Show error alert if something went wrong with login or signup */
@@ -26,11 +33,10 @@ if(failed.value){
 let success = document.getElementById('success');
 if(success.value){
   Swal.fire({
-    position: "center",
     icon: "success",
     title: success.value,
-    showConfirmButton: true
-    // timer: 1500
+    showConfirmButton: false,
+    timer: 1000
   });
 }
 

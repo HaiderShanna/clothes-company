@@ -1,34 +1,36 @@
 <?php
-class Products_model extends CI_Model{
+class Products_model extends CI_Model
+{
 
   /* get clothes  */
-  public function get_clothes($category_id, $limit){
+  public function get_clothes($category_id, $limit)
+  {
     // temporary for best selling
-    if(empty($category_id)){
+    if (empty($category_id)) {
       $query = $this->db->get('product', $limit);
       return $query->result();
-    }
-    else{
+    } else {
       $query = $this->db->get_where('product', ['category_id' => $category_id], $limit);
       return $query->result();
     }
   }
 
   /* Get all Clothes */
-  public function get_all_clothes($category_id){
+  public function get_all_clothes($category_id)
+  {
     // temporary for best selling
-    if(empty($category_id)){
+    if (empty($category_id)) {
       $query = $this->db->get('product');
       return $query->result();
-    }
-    else{
+    } else {
       $query = $this->db->get_where('product', ['category_id' => $category_id]);
       return $query->result();
     }
   }
 
   /* Get a specific product and its variants (colors, sizes) using its ID */
-  public function get_variants($id){
+  public function get_variants($id)
+  {
     $query = $this->db->query('
       SELECT 
         product.id, 
@@ -46,5 +48,81 @@ class Products_model extends CI_Model{
     ');
 
     return $query->result();
+  }
+
+  /* Get variants from an array of IDs */
+  public function get_variant($variantIds)
+  {
+    $query = $this->db->where_in('id', $variantIds)
+      ->get('variants');
+
+    return $query->result();
+  }
+  /* Get products from an array of IDs */
+  public function get_product_prices($variantIds)
+  {
+    $query = $this->db->select('product.price')
+      ->from('variants')
+      ->join('product', 'variants.product_id = product.id')
+      ->where_in('variants.id', $variantIds)
+      ->get();
+
+    return $query->result();
+  }
+
+  public function get_variant_id($productId, $color, $size)
+  {
+    $query = $this->db->select('id')
+      ->where('product_id', $productId)
+      ->where('color', $color)
+      ->where('size', $size)
+      ->get('variants');
+
+    return $query->row();
+  }
+
+  /* Add a new order */
+  public function new_order($data, $user_id)
+  {
+    usort($data, function ($a, $b) {
+      return $a->id <=> $b->id;
+    });
+
+    $variantIds = [];
+    $shipping = 5.00;
+    $total = 0 + $shipping;
+
+    foreach ($data as $variant) {
+      array_push($variantIds, $variant->id);
+    }
+
+    $variants = $this->get_variant($variantIds);
+    $product_prices = $this->get_product_prices($variantIds);
+    
+    foreach ($product_prices as $i => $product) {
+      $total += $product->price * $data[$i]->quantity;
+    }
+
+    $order = [
+      'customer_id' => $user_id,
+      'total_price' => $total
+    ];
+    $query1 = $this->db->insert('orders', $order);
+    $insert_id = $this->db->insert_id();
+
+    $items = [];
+    foreach ($variants as $i => $variant) {
+      array_push($items, [
+        'order_id' => $insert_id,
+        'variant_id' => $variant->id,
+        'quantity' => $data[$i]->quantity,
+        'price' => $product_prices[$i]->price
+      ]);
+    }
+    
+    $query2 = $this->db->insert_batch('order_items', $items);
+    if($query1 && $query2){
+      return $total;
+    }
   }
 }

@@ -17,6 +17,8 @@ $(document).ready(() => {
     // Create product elements 
     createElements(data);
 
+
+
     /* Add to cart event listener */
     let addToCartEl = document.querySelector('.add-to-cart-btn');
     addToCartEl.addEventListener('click', ()=>{
@@ -136,7 +138,7 @@ function colorChange(data) {
   }
 
 /* Add product to the local storage (cart) */
-function addToCart() {
+async function addToCart() {
   let img = imageContainer.childNodes[0].src;
   let name = document.querySelector('.product-name').innerHTML;
   let color = document.querySelector('.color').value;
@@ -145,17 +147,45 @@ function addToCart() {
   let available = document.querySelector('.available-quantity strong').innerHTML;
   let price = document.querySelector('.price span').innerHTML;
   let data = JSON.parse(localStorage.getItem('cart')) || [];
+  let alreadyAdded = false;
 
-  // console.log(available);
+  /* Get variant Id */
+  let res = await fetch(`${baseUrl}variant/${id}/${color}/${size}`);
+  let variantId = await res.json();
+  variantId = variantId.id;
+
+  /* check if the item is already in the cart */
+  data.forEach(variant => {
+    if(variant['variantId'].includes(variantId)){
+      alreadyAdded = true;
+    }
+  })
+  // check the entered quantity
   if(quantity > parseInt(available)){
     Swal.fire({
       title: "No Available Quantity",
       icon: "error",
     });
   }
+  // check if the item is already in the cart
+  else if(alreadyAdded){
+    Swal.fire({
+      title: "Already in the Cart",
+      icon: "info",
+    });
+  }
+  // check if the quantity is less than 1
+  else if(quantity < 1){
+    Swal.fire({
+      title: "Enter a Quantity",
+      icon: "info",
+    });
+  }
+  // add the item to the cart
   else{
     data.push({
       id,
+      variantId,
       img,
       name,
       color,
