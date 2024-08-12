@@ -60,3 +60,5 @@ $route['signup'] = 'login_signup_system/Login/checksignup';
 $route['logout'] = 'login_signup_system/Login/logout';
 $route['cart'] = 'cart_ctrl/cart';
 $route['neworder'] = 'cart_ctrl/cart/neworder';
+$route['track'] = 'cart_ctrl/cart/track';
+$route['orders'] = 'cart_ctrl/cart/orders';

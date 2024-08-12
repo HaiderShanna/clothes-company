@@ -125,4 +125,25 @@ class Products_model extends CI_Model
       return $total;
     }
   }
+
+  /* Get user orders using his ID */
+  public function get_user_orders($user_id){
+    $query = $this->db->query("
+      select o.id as order_id, 
+            o.status as status,
+            o.total_price as total,
+            p.id as product_id, 
+            p.name as name, 
+            p.img as img, 
+            oi.quantity as quantity, 
+            oi.price as price
+      FROM order_items as oi
+      JOIN orders as o ON oi.order_id = o.id
+      JOIN variants as v ON oi.variant_id = v.id
+      JOIN product as p ON v.product_id = p.id
+      WHERE o.customer_id = $user_id
+      ORDER BY o.id DESC   
+    ");
+    return $query->result();
+  }
 }

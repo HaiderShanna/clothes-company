@@ -99,7 +99,7 @@
       <!-- logged in -->
       <div class="logged-in hide">
         <h3>Logged in as : <b><?php echo $_SESSION['name'] ?></b></h3>
-        <button class="track-orders-btn">Track Your Orders</button>
+        <a href="<?php echo base_url('track') ?>" class="track-orders-btn">Track Your Orders</a>
         <a class="log-out-btn" href="<?php echo base_url('logout') ?>">Log out</a>
       </div>
 

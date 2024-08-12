@@ -4,10 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="<?php echo base_url('assets/css/header_design.css') ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/home_style.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/track_orders.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/footer_design.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/login_dialog.css') ?>">
+
+  <!-- Jquery links -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+  <!-- bootstrap links -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <!-- Font awesome link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,12 +22,12 @@
   <!-- Sweet alert 2 link -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <title>Home</title>
+
+  <title>Track Your orders</title>
 </head>
 
 <body>
-  <span class="loader"></span>
-  <header>
+  <header style="display: flex;">
     <a href="<?php echo base_url('home') ?>">
       <img class="logo" src="<?php echo base_url('assets/imgs/svg/logo-no-background.svg') ?>" alt="">
     </a>
@@ -39,10 +46,13 @@
         <button class="login-btn open-form"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
       </li>
       <li>
-        <a href="<?php echo base_url('home/about') ?>">About</a>
+        <a style="text-decoration: none; color:black;" href="<?php echo base_url('home') ?>">Home</a>
       </li>
       <li>
-        <a href="<?php echo base_url('cart') ?>">
+        <a style="text-decoration: none; color:black;" href="<?php echo base_url('home/about') ?>">About</a>
+      </li>
+      <li>
+        <a style="text-decoration: none; color:black;" href="<?php echo base_url('cart') ?>">
           <i class="fa-solid fa-cart-shopping">
             <span class="cart-num"></span>
           </i>
@@ -94,46 +104,18 @@
 
       <!-- logged in -->
       <div class="logged-in hide">
-        <h3>Logged in as : <b><?php echo $_SESSION['name'] ?></b></h3>
+        <p>Logged in as : <b><?php echo $_SESSION['name'] ?></b></p>
         <a href="<?php echo base_url('track') ?>" class="track-orders-btn">Track Your Orders</a>
         <button class="log-out-btn">Log out</button>
       </div>
 
     </div>
   </dialog>
-  <div class="img-container">
-    <img class="preview-img" src="<?php echo base_url('assets/imgs/background-img.jpg') ?>" alt="">
-  </div>
+
   <div class="container">
-    <div class="best-selling category-container">
-      <div class="category-header">
-        <h1>Best Selling :</h1>
-        <button class="show-all-btn" data-category="best-selling">Show All</button>
-      </div>
-      <div class="products-grid"></div>
-    </div>
-    <div class="men-clothes category-container">
-      <div class="category-header">
-        <h1>Men's Clothes :</h1>
-        <button class="show-all-btn" data-category="men">Show All</button>
-      </div>
-      <div class="products-grid"></div>
-    </div>
-    <div class="women-clothes category-container">
-      <div class="category-header">
-        <h1>Women's Clothes :</h1>
-        <button class="show-all-btn" data-category="women">Show All</button>
-      </div>
-      <div class="products-grid"></div>
-    </div>
-    <div class="children-clothes category-container">
-      <div class="category-header">
-        <h1>Children's Clothes :</h1>
-        <button class="show-all-btn" data-category="children">Show All</button>
-      </div>
-      <div class="products-grid"></div>
-    </div>
+    <h1>No Orders To Track</h1>
   </div>
+
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-section">
@@ -177,7 +159,7 @@
   <input type="hidden" id="logged-in-session" value='<?php echo isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : '' ?>'>
   <!-- -------------------------------- -->
 
-  <script type="module" src="<?php echo base_url('assets/js/home/home_page.js') ?>"></script>
+  <script type="module" src="<?php echo base_url('assets/js/cart/track.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
 </body>
 

@@ -73,4 +73,33 @@ class Cart extends CI_Controller{
 
     }
   }
+
+  /* Track Your orders */
+  public function track(){
+    if(!isset($_SESSION['logged_in'])){
+      redirect('logout');
+      die();
+    }
+    $this->load->view('cart_views/track_orders');
+  }
+
+  public function orders(){
+    $this->load->model('products_model', 'model');
+
+    if(!isset($_SESSION['logged_in'])){
+      echo json_encode(['status' => 'error', 'error' => 'You are not Logged In']);
+      die();
+    }
+
+    $user_id = $_SESSION['user_id'];
+    if(!isset($user_id)){
+      echo json_encode(['status' => 'error', 'error' => 'Something Went Wrong !']);
+      die();
+    }
+
+    $orders = $this->model->get_user_orders($user_id);
+    if(isset($orders)){
+      echo json_encode($orders);
+    }
+  }
 }
