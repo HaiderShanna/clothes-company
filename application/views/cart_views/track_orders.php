@@ -31,15 +31,20 @@
     <a href="<?php echo base_url('home') ?>">
       <img class="logo" src="<?php echo base_url('assets/imgs/svg/logo-no-background.svg') ?>" alt="">
     </a>
-    <div class="search-container">
-      <select name="" id="category" class="category">
-        <option value="best-selling" selected>All</option>
-        <option value="men">Men</option>
-        <option value="women">Women</option>
-        <option value="children">Children</option>
-      </select>
-      <input type="search" class="search-input" placeholder="Enter something to search for ...">
-      <button class="search-btn"><i class="fa fa-search"></i></button>
+    <div class="shit">
+      <div class="search-container">
+        <select name="" id="category" class="category">
+          <option value="best-selling" selected>All</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+          <option value="children">Children</option>
+        </select>
+        <input type="search" class="search-input" placeholder="Enter something to search for ...">
+        <button class="search-btn"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="search-results">
+        <span class="loader" id="search-loader"></span>
+      </div>
     </div>
     <ul>
       <li>
@@ -161,6 +166,7 @@
 
   <script type="module" src="<?php echo base_url('assets/js/cart/track.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/search.js') ?>"></script>
 </body>
 
 </html>

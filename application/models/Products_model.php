@@ -107,6 +107,8 @@ class Products_model extends CI_Model
       'customer_id' => $user_id,
       'total_price' => $total
     ];
+
+    // Insert a new order
     $query1 = $this->db->insert('orders', $order);
     $insert_id = $this->db->insert_id();
 
@@ -120,8 +122,21 @@ class Products_model extends CI_Model
       ]);
     }
     
+    // insert order items
     $query2 = $this->db->insert_batch('order_items', $items);
-    if($query1 && $query2){
+
+    // decrease purchased items quantities
+    $update = [];
+    foreach ($variants as $i => $variant) {
+      array_push($update, [
+        'id' => $data[$i]->id,
+        'quantity' => (int)$variant->quantity - (int)$data[$i]->quantity
+      ]);
+    }
+
+    $query3 = $this->db->update_batch('variants', $update, 'id');
+
+    if($query1 && $query2 && $query3){
       return $total;
     }
   }
@@ -144,6 +159,13 @@ class Products_model extends CI_Model
       WHERE o.customer_id = $user_id
       ORDER BY o.id DESC   
     ");
+    return $query->result();
+  }
+
+  /* Search for a specific term and return the data */
+  public function search($term){
+    $query = $this->db->like('name', $term)
+    ->get('product');
     return $query->result();
   }
 }

@@ -87,7 +87,6 @@ function updateNumbers() {
   let quantityInputs = document.querySelectorAll('#quantity');
   subtotalPrice = 0;
   cart.forEach((item, i) => {
-    console.log(cart);
     subtotalPrice += parseFloat(item.price) * quantityInputs[i].value;
   });
   totalPrice = subtotalPrice + shippingPrice + taxesPrice;

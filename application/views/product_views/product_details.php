@@ -9,7 +9,7 @@
   <!-- Sweet alert 2 link -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  
+
   <!-- Jquery CDN -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -27,6 +27,21 @@
     <a href="<?php echo base_url('home') ?>">
       <img class="logo" src="<?php echo base_url('assets/imgs/svg/logo-no-background.svg') ?>" alt="">
     </a>
+    <div class="shit">
+      <div class="search-container">
+        <select name="" id="category" class="category">
+          <option value="best-selling" selected>All</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+          <option value="children">Children</option>
+        </select>
+        <input type="search" class="search-input" placeholder="Enter something to search for ...">
+        <button class="search-btn"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="search-results">
+        <span class="loader" id="search-loader"></span>
+      </div>
+    </div>
     <ul>
       <li>
         <button class="login-btn open-form"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
@@ -51,10 +66,14 @@
     <button class="close-btn">close</button>
     <div class="dialog-container">
       <!-- Login Form -->
-      <?php echo form_open('login',
-        ['class' => 'login-form'], 
-        ['file_path' => 'product_views/product_details',
-          'param'  => $id]) 
+      <?php echo form_open(
+        'login',
+        ['class' => 'login-form'],
+        [
+          'file_path' => 'product_views/product_details',
+          'param'  => $id
+        ]
+      )
       ?>
       <h1>Login</h1>
       <label for="login-email">Email :</label>
@@ -165,6 +184,7 @@
 
   <script type="module" src="<?php echo base_url('assets/js/product/product_details.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/login.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/search.js') ?>"></script>
 </body>
 
 </html>

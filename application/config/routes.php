@@ -62,3 +62,4 @@ $route['cart'] = 'cart_ctrl/cart';
 $route['neworder'] = 'cart_ctrl/cart/neworder';
 $route['track'] = 'cart_ctrl/cart/track';
 $route['orders'] = 'cart_ctrl/cart/orders';
+$route['search'] = 'product/search/index/$1';

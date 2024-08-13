@@ -15,12 +15,18 @@ a {
 .logo {
   width: 130px;
 }
-
+.shit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
 .search-container {
-  width: -webkit-fill-available;
   display: flex;
   justify-content: center;
   max-width: 650px;
+  width: 80%;
 }
 .search-container select{
   border: 1px solid black;
@@ -38,7 +44,7 @@ a {
   border: 1px solid black;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  width: 55%;
+  width: 85%;
 }
 .search-container .search-input:focus{
   outline: none;
@@ -61,11 +67,50 @@ a {
   opacity: 0.8;
 }
 
+.search-results{
+  width: 80%;
+  max-width: 650px;
+  min-height: 130px;
+  padding: 20px;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.search-product{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid black;
+  width: 100%;
+  padding: 5px;
+  transition: 0.3s;
+}
+.search-product:hover{
+  transform: scale(1.01);
+}
+.search-product img{
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
 ul {
   list-style: none;
   display: flex;
   align-items: center;
   column-gap: 15px;
+  padding: 0;
 }
 ul li{
   transition: 0.3s;
@@ -102,4 +147,11 @@ ul li:hover{
   top: -14px;
   left: 50%;
   display: none;
+}
+
+#search-loader{
+  position: absolute;
+  top: 42%;
+  left: 45%;
+  
 }

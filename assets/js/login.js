@@ -49,7 +49,7 @@ closeBtn.addEventListener('click', ()=>{
 });
 
 /* check if the user logged in or not */
-if(loggedInSession.value){
+if(loggedInSession.value){  
   loginForm.classList.add('hide');
   signupForm.classList.add('hide');
   loggedIn.classList.remove('hide');

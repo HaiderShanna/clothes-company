@@ -101,9 +101,9 @@ class Login extends CI_Controller{
         'password' => $password
       ];
       if($this->model->create_user($data)){
-        $id = $this->model->getUserId($email);
+        $user_id = $this->model->getUserId($email);
         $this->session->sess_regenerate(TRUE);
-        $this->session->set_userdata(['user_id' => $id, 'name' => $name, 'email' => $email, 'logged_in' => true]);
+        $this->session->set_userdata(['user_id' => $user_id, 'name' => $name, 'email' => $email, 'logged_in' => true]);
         $this->session->set_flashdata('success', 'Signed Up Successfully');
         $this->load->view($viewPath, $id);
       }
