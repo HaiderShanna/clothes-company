@@ -1,3 +1,6 @@
+import * as module from "../modules/helper.js";
+module.updateCartNumber();
+
 let baseUrl = document.getElementById('base-url').value;
 
 $(document).ready(function () {
@@ -15,7 +18,12 @@ $(document).ready(function () {
       data = JSON.parse(data);
       let currentOrder = -1;
 
-      $('.container').html('');
+      if(data.length < 1){
+        $('.container').html('<h1>No Orders To Track</h1>');
+      }
+      else{
+        $('.container').html('');
+      }
 
       data.forEach(product => {
 

@@ -156,7 +156,7 @@ async function addToCart() {
 
   /* check if the item is already in the cart */
   data.forEach(variant => {
-    if(variant['variantId'].includes(variantId)){
+    if(variant['variantId'] == variantId){      
       alreadyAdded = true;
     }
   })

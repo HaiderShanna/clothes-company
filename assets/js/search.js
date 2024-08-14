@@ -46,11 +46,13 @@ async function search(term) {
 input.addEventListener('input', () => {  
   if (input.value !== '') {
     resultsEl.style.opacity = 1;
+    resultsEl.style.minHeight = '130px';
     spinner.style.display = 'inline-block';
     search(input.value);
   }
   else {
     resultsEl.style.opacity = 0;
+    resultsEl.style.minHeight = '0';
     resultsEl.innerHTML = `<span class="loader" id="search-loader"></span>`;
   }
 })

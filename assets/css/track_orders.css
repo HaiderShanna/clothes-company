@@ -11,6 +11,12 @@ justify-content: space-between;
 min-height: 100vh;
 }
 
+h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-img{
   width: 150px;
   height: 150px;
