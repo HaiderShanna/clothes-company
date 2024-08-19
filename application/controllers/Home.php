@@ -35,7 +35,7 @@ class Home extends CI_Controller {
         $category_id = 3;
         break;
       case 'best-selling':
-        $category_id = '';
+        $category_id = 4;
         break;
       /*
         If the user entered invalid category in the url or didn't even entered a category name 
@@ -71,7 +71,7 @@ class Home extends CI_Controller {
         $category_id = 3;
         break;
       case 'best-selling':
-        $category_id = '';
+        $category_id = 4;
         break;
       /*
         If the user entered invalid category in the url or didn't even entered a category name 

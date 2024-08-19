@@ -58,7 +58,7 @@ function removeItem(product, id) {
   }
   else{
     cart.forEach((item, i) => {
-      if (item['variantId'].includes(id)) {
+      if (item['variantId']== id) {
         cart.splice(i, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
         product.remove();
@@ -130,7 +130,7 @@ let quantityInputs = document.querySelectorAll('#quantity');
 
 quantityInputs.forEach(input => {
   input.addEventListener('input', (e) => {
-    updateNumbers(e.target.value)
+    updateNumbers()    
   });
 })
 
@@ -190,7 +190,6 @@ function checkout() {
     }).then((result) => {
       if (result.isConfirmed) {
         newOrder(data);
-
       }
     });
   }
@@ -201,7 +200,7 @@ function newOrder(data) {
   fetch(`${baseUrl}neworder`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'app;ication/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(data),
 
@@ -222,7 +221,7 @@ function newOrder(data) {
             window.location.href = `${baseUrl}track`;
           }
         });
-        localStorage.removeItem('cart');
+        removeAllProducts();
       }
       else {
         Swal.fire({

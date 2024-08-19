@@ -5,9 +5,26 @@ class Products_model extends CI_Model
   /* get clothes  */
   public function get_clothes($category_id, $limit)
   {
-    // temporary for best selling
-    if (empty($category_id)) {
-      $query = $this->db->get('product', $limit);
+    // Get best selling
+    if ($category_id == 4) {
+      $query = $this->db->query('
+      select 
+        product.id, 
+        product.name, 
+        product.price, 
+        product.img, 
+        product.created_at,
+        product.category_id, 
+        product.description 
+      from order_items
+
+      join variants on order_items.variant_id = variants.id
+      join product on product.id = variants.product_id
+
+      group by product_id
+      order by count(product.id) desc
+      limit ' . $limit . '
+      ');
       return $query->result();
     } else {
       $query = $this->db->get_where('product', ['category_id' => $category_id], $limit);
@@ -18,9 +35,25 @@ class Products_model extends CI_Model
   /* Get all Clothes */
   public function get_all_clothes($category_id)
   {
-    // temporary for best selling
-    if (empty($category_id)) {
-      $query = $this->db->get('product');
+    // Get all best selling
+    if ($category_id == 4) {
+      $query = $this->db->query('
+      select 
+        product.id, 
+        product.name, 
+        product.price, 
+        product.img, 
+        product.created_at,
+        product.category_id, 
+        product.description 
+      from order_items
+
+      join variants on order_items.variant_id = variants.id
+      join product on product.id = variants.product_id
+
+      group by product_id
+      order by count(product.id) desc
+      ');
       return $query->result();
     } else {
       $query = $this->db->get_where('product', ['category_id' => $category_id]);
@@ -84,10 +117,6 @@ class Products_model extends CI_Model
   /* Add a new order */
   public function new_order($data, $user_id)
   {
-    usort($data, function ($a, $b) {
-      return $a->id <=> $b->id;
-    });
-
     $variantIds = [];
     $shipping = 5.00;
     $total = 0 + $shipping;

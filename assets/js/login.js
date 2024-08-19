@@ -9,6 +9,13 @@ let signupForm = document.querySelector('.signup-form');
 let loggedIn = document.querySelector('.logged-in');
 let loggedInSession = document.getElementById('logged-in-session');
 let logOutBtn = document.querySelector('.log-out-btn');
+let loginEmail = document.querySelector('#login-email');
+let signupName = document.querySelector('#name');
+let signupEmail = document.querySelector('#email');
+let inputs = document.getElementById('inputs').value;
+inputs = JSON.parse(inputs);
+
+
 
 /* logout button onclick */
 logOutBtn.addEventListener('click', () => {
@@ -47,6 +54,11 @@ openFormBtn.addEventListener('click', ()=>{
 closeBtn.addEventListener('click', ()=>{
   dialog.close();
 });
+dialog.addEventListener('click', (e)=>{
+  if (e.target == dialog) {
+    dialog.close();  
+  } 
+})
 
 /* check if the user logged in or not */
 if(loggedInSession.value){  
@@ -71,11 +83,14 @@ loginBtn.addEventListener('click', ()=>{
 let errorType = document.getElementById('error-type');
 
 if(errorType.value == 'signup'){
+  signupName.value = inputs.name;
+  signupEmail.value = inputs.email;
   signupForm.classList.remove('hide');
   loginForm.classList.add('hide');
   dialog.showModal();
 }
 else if(errorType.value == 'login'){
+  loginEmail.value = inputs.email;
   signupForm.classList.add('hide');
   loginForm.classList.remove('hide');
   dialog.showModal();

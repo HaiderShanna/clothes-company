@@ -154,5 +154,5 @@ ul li:hover{
   position: absolute;
   top: 42%;
   left: 45%;
-  
+  display: none;
 }

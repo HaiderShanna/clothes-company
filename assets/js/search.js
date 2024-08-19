@@ -5,9 +5,6 @@ let spinner = document.getElementById('search-loader');
 
 
 async function search(term) {
-  console.log(term);
-
-
   let res = await fetch(`${baseUrl}search`, {
     method: 'POST',
     headers: {
@@ -17,9 +14,7 @@ async function search(term) {
   });
   let data = await res.json();
   resultsEl.innerHTML = `<span class="loader" id="search-loader"></span>`;
-  spinner = document.getElementById('search-loader');
 
-  spinner.style.display = 'none';
   if (data.error) {
     resultsEl.innerHTML += `<h2>${data.error}</h2>`;
   }
@@ -47,12 +42,12 @@ input.addEventListener('input', () => {
   if (input.value !== '') {
     resultsEl.style.opacity = 1;
     resultsEl.style.minHeight = '130px';
-    spinner.style.display = 'inline-block';
+    document.getElementById('search-loader').style.display = 'inline-block';
     search(input.value);
   }
   else {
     resultsEl.style.opacity = 0;
     resultsEl.style.minHeight = '0';
-    resultsEl.innerHTML = `<span class="loader" id="search-loader"></span>`;
+    resultsEl.innerHTML = `<span class="loader" id="search-loader"></span>`
   }
 })

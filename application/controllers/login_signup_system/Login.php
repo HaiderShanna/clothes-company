@@ -58,7 +58,8 @@ class Login extends CI_Controller{
     $email = trim($this->input->post('login-email'));
 
     if(empty($email) || empty($password)){
-      return TRUE;
+      $this->form_validation->set_message('checkPassword', 'Incorrect {field}');
+      return FALSE;
     }
     if (!$this->model->correctPassword($password, $email)){
       $this->form_validation->set_message('checkPassword', 'Incorrect {field}');
