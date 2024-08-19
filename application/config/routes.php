@@ -63,3 +63,9 @@ $route['neworder'] = 'cart_ctrl/cart/neworder';
 $route['track'] = 'cart_ctrl/cart/track';
 $route['orders'] = 'cart_ctrl/cart/orders';
 $route['search'] = 'product/search/index/$1';
+
+/* Admin Routes */
+$route['admin'] = 'admin/login/index';
+$route['admin/login'] = 'admin/login/checkLogin';
+$route['admin/logout'] = 'admin/login/logout';
+$route['admin/getproducts'] = 'admin/home/getproducts';
