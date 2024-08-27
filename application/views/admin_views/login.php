@@ -8,7 +8,7 @@
 
   <title>Admin Login</title>
 </head>
-<body>
+<body class="login-body">
   <?php echo form_open('admin/login', ['id' => 'login-form']) ?>
     <h1>Login</h1>
     <label for="email">Email :</label>

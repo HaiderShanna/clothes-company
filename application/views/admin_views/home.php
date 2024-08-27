@@ -13,18 +13,20 @@
 
   <!-- Jquery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+  <!-- jquery css -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
-  <!-- Data Tables -->
+  <!-- Data Tables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
+  <!-- Data Tables JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
   <title>Home</title>
@@ -42,13 +44,14 @@
       Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
     </a>
   </header>
-
   <div class="box container">
-    <div class="products-div">
-      <i class="fa-solid fa-shirt"></i> Products
-    </div>
-    <div class="statistics-div">
-      <i class="fa-solid fa-chart-line"></i> Statistics
+    <div class="shit">
+      <div class="products-div">
+        <i class="fa-solid fa-shirt"></i> Products
+      </div>
+      <div class="statistics-div">
+        <i class="fa-solid fa-chart-line"></i> Statistics
+      </div>
     </div>
   </div>
 

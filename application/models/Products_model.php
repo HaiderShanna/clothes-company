@@ -21,13 +21,17 @@ class Products_model extends CI_Model
       join variants on order_items.variant_id = variants.id
       join product on product.id = variants.product_id
 
+      where product.status = 1
       group by product_id
       order by count(product.id) desc
       limit ' . $limit . '
       ');
       return $query->result();
     } else {
-      $query = $this->db->get_where('product', ['category_id' => $category_id], $limit);
+      $query = $this->db->get_where('product', [
+        'category_id' => $category_id,
+        'status' => 1
+      ], $limit);
       return $query->result();
     }
   }
@@ -51,12 +55,16 @@ class Products_model extends CI_Model
       join variants on order_items.variant_id = variants.id
       join product on product.id = variants.product_id
 
+      where product.status = 1
       group by product_id
       order by count(product.id) desc
       ');
       return $query->result();
     } else {
-      $query = $this->db->get_where('product', ['category_id' => $category_id]);
+      $query = $this->db->get_where('product', [
+        'category_id' => $category_id,
+        'status' => 1
+      ]);
       return $query->result();
     }
   }
@@ -76,7 +84,8 @@ class Products_model extends CI_Model
         GROUP_CONCAT(variants.quantity) as quantity
       FROM `product`
       JOIN variants ON product.id = variants.product_id
-      WHERE product.id = ' . $id . '
+      WHERE product.id = ' . $id . ' and 
+            variants.status = 1  
       GROUP BY product.id, variants.color;
     ');
 
@@ -98,6 +107,7 @@ class Products_model extends CI_Model
       ->from('variants')
       ->join('product', 'variants.product_id = product.id')
       ->where_in('variants.id', $variantIds)
+      ->where('variants.status', 1)
       ->get();
 
     return $query->result();
@@ -194,7 +204,7 @@ class Products_model extends CI_Model
   /* Search for a specific term and return the data */
   public function search($term){
     $query = $this->db->like('name', $term)
-    ->get('product');
+    ->get_where('product', ['status' => 1]);
     return $query->result();
   }
 }

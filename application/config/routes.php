@@ -69,3 +69,7 @@ $route['admin'] = 'admin/login/index';
 $route['admin/login'] = 'admin/login/checkLogin';
 $route['admin/logout'] = 'admin/login/logout';
 $route['admin/getproducts'] = 'admin/home/getproducts';
+$route['admin/getproductvariants/(:num)'] = 'admin/home/getproductvariants/$1';
+$route['admin/editproduct'] = 'admin/home/editproduct';
+$route['admin/addproduct'] = 'admin/home/addproduct';
+$route['admin/deleteproduct'] = 'admin/home/deleteproduct';
